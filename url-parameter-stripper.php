@@ -26,6 +26,19 @@ define('UPS_CAP', 'manage_options');
 require_once __DIR__ . '/includes/sanitize.php';
 require_once __DIR__ . '/admin/settings.php';
 
+/**
+ * Load plugin translations.
+ */
+function ups_load_textdomain()
+{
+    load_plugin_textdomain(
+        'url-parameter-stripper',
+        false,
+        dirname(plugin_basename(__FILE__)) . '/languages'
+    );
+}
+add_action('plugins_loaded', 'ups_load_textdomain');
+
 // ---- Hook into common save paths ----
 
 // Posts (content & excerpt)

@@ -21,14 +21,24 @@ add_action('admin_init', function () {
     ]);
 
     add_settings_section('ups_main', __('Removal Rules', 'url-parameter-stripper'), function () {
-        echo '<p>Enter a comma-separated list. Examples: <code>utm_*,gclid,ref</code>. 
-        Keys with <code>*</code> remove matching query parameters (e.g., <code>utm_source</code>); 
-        any other text is stripped as a raw substring from URLs.</p>';
+        echo wp_kses_post(
+            sprintf(
+                /* translators: 1: example list, 2: wildcard indicator, 3: example parameter */
+                __('Enter a comma-separated list. Examples: %1$s. Keys with %2$s remove matching query parameters (e.g., %3$s); any other text is stripped as a raw substring from URLs.', 'url-parameter-stripper'),
+                '<code>utm_*,gclid,ref</code>',
+                '<code>*</code>',
+                '<code>utm_source</code>'
+            )
+        );
     }, 'url-parameter-stripper');
 
     add_settings_field('ups_patterns', __('Patterns', 'url-parameter-stripper'), function () {
         $val = esc_attr(get_option(UPS_OPTION_KEY, 'utm_*,gclid,fbclid'));
-        echo '<input type="text" name="' . UPS_OPTION_KEY . '" value="' . $val . '" class="regular-text" />';
+        printf(
+            '<input type="text" name="%1$s" value="%2$s" class="regular-text" />',
+            esc_attr(UPS_OPTION_KEY),
+            $val
+        );
     }, 'url-parameter-stripper', 'ups_main');
 });
 
