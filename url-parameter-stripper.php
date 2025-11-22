@@ -1,16 +1,20 @@
 <?php
 
 /**
- * Plugin Name:     URL Parameter Stripper
- * Plugin URI:      PLUGIN SITE HERE
- * Description:     Removes specified substrings or query parameters from URLs before saving them to the DB (posts, comments, options, meta).
- * Author:          Saulo Tauil
- * Author URI:      https://optogrid.com
- * Text Domain:     url-parameter-stripper
- * Domain Path:     /languages
- * Version:         0.1.0
+ * Plugin Name:       URL Parameter Stripper
+ * Plugin URI:        https://optogrid.com
+ * Description:       Removes specified substrings or query parameters from URLs before saving them to the DB (posts, comments, options, meta).
+ * Version:           1.0.0
+ * Requires at least: 4.5
+ * Requires PHP:      5.6
+ * Author:            Saulo Tauil
+ * Author URI:        https://optogrid.com
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       url-parameter-stripper
+ * Domain Path:       /languages
  *
- * @package         Url_Parameter_Stripper
+ * @package           Url_Parameter_Stripper
  */
 
 // Your code starts here.
