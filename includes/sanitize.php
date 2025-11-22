@@ -49,8 +49,13 @@ function ups_strip_url($url)
     $parts = wp_parse_url($url);
     if (!$parts) return $url;
 
-    $scheme   = $parts['scheme']  ?? '';
-    $host     = $parts['host']    ?? '';
+    // Validate required components exist (scheme and host are mandatory for valid URLs)
+    if (empty($parts['scheme']) || empty($parts['host'])) {
+        return $url;
+    }
+
+    $scheme   = $parts['scheme'];
+    $host     = $parts['host'];
     $port     = $parts['port']    ?? '';
     $user     = $parts['user']    ?? '';
     $pass     = $parts['pass']    ?? '';
@@ -81,9 +86,10 @@ function ups_strip_url($url)
         $query = http_build_query($args, '', '&', PHP_QUERY_RFC3986);
     }
 
+    // Rebuild URL with validated components
     $auth = $user ? $user . ($pass ? ':' . $pass : '') . '@' : '';
     $hostport = $host . ($port ? ':' . $port : '');
-    $rebuilt = ($scheme ? $scheme . '://' : '') . $auth . $hostport . $path;
+    $rebuilt = $scheme . '://' . $auth . $hostport . $path;
     if ($query !== '') $rebuilt .= '?' . $query;
     if ($fragment) $rebuilt .= '#' . $fragment;
 
