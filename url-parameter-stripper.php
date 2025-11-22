@@ -2,7 +2,6 @@
 
 /**
  * Plugin Name:       URL Parameter Stripper
- * Plugin URI:        https://optogrid.com
  * Description:       Removes specified substrings or query parameters from URLs before saving them to the DB (posts, comments, options, meta).
  * Version:           1.0.0
  * Requires at least: 4.5
