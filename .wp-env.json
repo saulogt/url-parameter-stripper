@@ -1,0 +1,12 @@
+{
+  "phpVersion": null,
+  "core": null,
+  "plugins": ["."],
+  "port": 8898,
+  "testsPort": 8899,
+  "config": {
+    "JETPACK_AUTOLOAD_DEV": true,
+    "WP_DEBUG": true,
+    "SCRIPT_DEBUG": true
+  }
+}

@@ -4,10 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "composer run test",
+    "build": "wp-scripts build --blocks-manifest",
+    "plugin-zip": "pnpm build && composer install --no-dev --optimize-autoloader && wp-scripts plugin-zip",
+    "bundle": "wp-scripts dist-zip"
   },
   "keywords": [],
   "author": "saulogt",
   "license": "GPLv2",
-  "packageManager": "pnpm@10.13.1"
+  "packageManager": "pnpm@10.13.1",
+  "devDependencies": {
+    "@wordpress/scripts": "^31.0.0"
+  }
 }
