@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ruleset name="URL Parameter Stripper">
+    <description>PHPCS configuration for the URL Parameter Stripper plugin.</description>
+
+    <file>url-parameter-stripper.php</file>
+    <file>admin</file>
+    <file>includes</file>
+
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/tests/*</exclude-pattern>
+
+    <rule ref="WordPress-Core" />
+    <rule ref="WordPress-Docs" />
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals" />
+
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" value="url-parameter-stripper" />
+        </properties>
+    </rule>
+</ruleset>

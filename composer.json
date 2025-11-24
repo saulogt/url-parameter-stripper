@@ -1,10 +1,20 @@
 {
   "require-dev": {
     "wp-cli/i18n-command": "^2",
-    "phpunit/phpunit": "^9.6"
+    "phpunit/phpunit": "^9.6",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+    "wp-coding-standards/wpcs": "^3.1",
+    "squizlabs/php_codesniffer": "^3.9"
   },
   "scripts": {
     "makepot": "wp i18n make-pot .",
-    "test": "phpunit"
+    "test": "phpunit",
+    "lint": "phpcs",
+    "lint:fix": "phpcbf"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }

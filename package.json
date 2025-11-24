@@ -6,8 +6,7 @@
   "scripts": {
     "test": "composer run test",
     "build": "wp-scripts build --blocks-manifest",
-    "plugin-zip": "pnpm build && composer install --no-dev --optimize-autoloader && wp-scripts plugin-zip",
-    "bundle": "wp-scripts dist-zip"
+    "plugin-zip": "pnpm build && composer install --no-dev --optimize-autoloader && wp-scripts plugin-zip"
   },
   "keywords": [],
   "author": "saulogt",

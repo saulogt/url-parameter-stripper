@@ -1,0 +1,55 @@
+# Copyright (C) 2025 Saulo Tauil
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: URL Parameter Stripper 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/url-parameter-stripper\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-11-22T21:05:58+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: url-parameter-stripper\n"
+
+#. Plugin Name of the plugin
+#: url-parameter-stripper.php
+#: admin/settings.php:6
+#: admin/settings.php:48
+msgid "URL Parameter Stripper"
+msgstr ""
+
+#. Description of the plugin
+#: url-parameter-stripper.php
+msgid "Removes specified substrings or query parameters from URLs before saving them to the DB (posts, comments, options, meta)."
+msgstr ""
+
+#. Author of the plugin
+#: url-parameter-stripper.php
+msgid "Saulo Tauil"
+msgstr ""
+
+#. Author URI of the plugin
+#: url-parameter-stripper.php
+msgid "https://optogrid.com"
+msgstr ""
+
+#: admin/settings.php:7
+msgid "URL Stripper"
+msgstr ""
+
+#: admin/settings.php:23
+msgid "Removal Rules"
+msgstr ""
+
+#. translators: 1: example list, 2: wildcard indicator, 3: example parameter
+#: admin/settings.php:27
+#, php-format
+msgid "Enter a comma-separated list. Examples: %1$s. Keys with %2$s remove matching query parameters (e.g., %3$s); any other text is stripped as a raw substring from URLs."
+msgstr ""
+
+#: admin/settings.php:35
+msgid "Patterns"
+msgstr ""

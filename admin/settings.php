@@ -20,11 +20,19 @@ add_action('admin_init', function () {
         'default' => 'utm_*,gclid,fbclid'
     ]);
 
+    register_setting('ups_settings', 'ups_fragment_patterns', [
+        'type' => 'string',
+        'sanitize_callback' => function ($val) {
+            return sanitize_text_field($val);
+        },
+        'default' => ''
+    ]);
+
     add_settings_section('ups_main', __('Removal Rules', 'url-parameter-stripper'), function () {
         echo wp_kses_post(
             sprintf(
                 /* translators: 1: example list, 2: wildcard indicator, 3: example parameter */
-                __('Enter a comma-separated list. Examples: %1$s. Keys with %2$s remove matching query parameters (e.g., %3$s); any other text is stripped as a raw substring from URLs.', 'url-parameter-stripper'),
+                __('Enter a comma-separated list. Examples: %1$s. Keys with %2$s remove matching query parameters (e.g., %3$s); any other text is stripped as a raw substring from URLs.<br>For strict value matching use <code>key=value</code> format.', 'url-parameter-stripper'),
                 '<code>utm_*,gclid,ref</code>',
                 '<code>*</code>',
                 '<code>utm_source</code>'
@@ -32,12 +40,21 @@ add_action('admin_init', function () {
         );
     }, 'url-parameter-stripper');
 
-    add_settings_field('ups_patterns', __('Patterns', 'url-parameter-stripper'), function () {
+    add_settings_field('ups_patterns', __('Query Parameters', 'url-parameter-stripper'), function () {
         $val = esc_attr(get_option(UPS_OPTION_KEY, 'utm_*,gclid,fbclid'));
         printf(
             '<input type="text" name="%1$s" value="%2$s" class="regular-text" />',
             esc_attr(UPS_OPTION_KEY),
             $val
+        );
+    }, 'url-parameter-stripper', 'ups_main');
+
+    add_settings_field('ups_fragment_patterns', __('Fragment Rules', 'url-parameter-stripper'), function () {
+        $val = esc_attr(get_option('ups_fragment_patterns', ''));
+        printf(
+            '<input type="text" name="ups_fragment_patterns" value="%1$s" class="regular-text" /><p class="description">%2$s</p>',
+            $val,
+            esc_html__('Comma-separated list. Use * to strip all fragments, or specific patterns like ":~:text=*".', 'url-parameter-stripper')
         );
     }, 'url-parameter-stripper', 'ups_main');
 });
