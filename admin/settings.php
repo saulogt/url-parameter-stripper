@@ -41,19 +41,19 @@ add_action('admin_init', function () {
     }, 'url-parameter-stripper');
 
     add_settings_field('ups_patterns', __('Query Parameters', 'url-parameter-stripper'), function () {
-        $val = esc_attr(get_option(UPS_OPTION_KEY, 'utm_*,gclid,fbclid'));
+        $val = get_option(UPS_OPTION_KEY, 'utm_*,gclid,fbclid');
         printf(
             '<input type="text" name="%1$s" value="%2$s" class="regular-text" />',
             esc_attr(UPS_OPTION_KEY),
-            $val
+            esc_attr($val)
         );
     }, 'url-parameter-stripper', 'ups_main');
 
     add_settings_field('ups_fragment_patterns', __('Fragment Rules', 'url-parameter-stripper'), function () {
-        $val = esc_attr(get_option('ups_fragment_patterns', ''));
+        $val = get_option('ups_fragment_patterns', '');
         printf(
             '<input type="text" name="ups_fragment_patterns" value="%1$s" class="regular-text" /><p class="description">%2$s</p>',
-            $val,
+            esc_attr($val),
             esc_html__('Comma-separated list. Use * to strip all fragments, or specific patterns like ":~:text=*".', 'url-parameter-stripper')
         );
     }, 'url-parameter-stripper', 'ups_main');

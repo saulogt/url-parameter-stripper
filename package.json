@@ -19,7 +19,7 @@
     "assets/*",
     "includes/*",
     "admin/*",
-    "languages/*",
+    "languages/*.pot",
     "url-parameter-stripper.php"
   ]
 }
