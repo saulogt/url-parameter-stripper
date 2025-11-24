@@ -14,5 +14,12 @@
   "packageManager": "pnpm@10.13.1",
   "devDependencies": {
     "@wordpress/scripts": "^31.0.0"
-  }
+  },
+  "files": [
+    "assets/*",
+    "includes/*",
+    "admin/*",
+    "languages/*",
+    "url-parameter-stripper.php"
+  ]
 }
