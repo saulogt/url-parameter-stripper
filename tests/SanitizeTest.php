@@ -26,11 +26,11 @@ class SanitizeTest extends TestCase
     {
         $this->assertEquals(
             'https://example.com/',
-            ups_strip_url('https://example.com/?utm_source=123')
+            url_parameter_stripper_strip_url('https://example.com/?utm_source=123')
         );
         $this->assertEquals(
             'https://example.com/',
-            ups_strip_url('https://example.com/?gclid=abc')
+            url_parameter_stripper_strip_url('https://example.com/?gclid=abc')
         );
     }
 
@@ -39,13 +39,13 @@ class SanitizeTest extends TestCase
         // foo=bar is in default mock options
         $this->assertEquals(
             'https://example.com/',
-            ups_strip_url('https://example.com/?foo=bar')
+            url_parameter_stripper_strip_url('https://example.com/?foo=bar')
         );
         
         // foo=baz mismatch
         $this->assertEquals(
             'https://example.com/?foo=baz',
-            ups_strip_url('https://example.com/?foo=baz')
+            url_parameter_stripper_strip_url('https://example.com/?foo=baz')
         );
     }
 
@@ -54,7 +54,7 @@ class SanitizeTest extends TestCase
         // wildcard * is set in setUp
         $this->assertEquals(
             'https://example.com/',
-            ups_strip_url('https://example.com/#somefrag')
+            url_parameter_stripper_strip_url('https://example.com/#somefrag')
         );
 
         // Test specific fragment pattern
@@ -62,13 +62,13 @@ class SanitizeTest extends TestCase
         
         $this->assertEquals(
             'https://example.com/',
-            ups_strip_url('https://example.com/#:~:text=hello')
+            url_parameter_stripper_strip_url('https://example.com/#:~:text=hello')
         );
         
         // Should not strip unmatched fragment
         $this->assertEquals(
             'https://example.com/#other',
-            ups_strip_url('https://example.com/#other')
+            url_parameter_stripper_strip_url('https://example.com/#other')
         );
     }
 
@@ -77,17 +77,17 @@ class SanitizeTest extends TestCase
         // Should strip inside href
         $input = 'Check <a href="https://example.com/?utm_source=test">link</a>.';
         $expected = 'Check <a href="https://example.com/">link</a>.';
-        $this->assertEquals($expected, ups_sanitize_text_urls($input));
+        $this->assertEquals($expected, url_parameter_stripper_sanitize_text_urls($input));
 
         // Should NOT strip plain text URL
         $input = 'Check https://example.com/?utm_source=test logic.';
         $expected = 'Check https://example.com/?utm_source=test logic.';
-        $this->assertEquals($expected, ups_sanitize_text_urls($input));
+        $this->assertEquals($expected, url_parameter_stripper_sanitize_text_urls($input));
         
         // Should handle single quotes
         $input = "Link <a href='https://example.com/?utm_medium=email'>here</a>";
         $expected = "Link <a href='https://example.com/'>here</a>";
-        $this->assertEquals($expected, ups_sanitize_text_urls($input));
+        $this->assertEquals($expected, url_parameter_stripper_sanitize_text_urls($input));
     }
 
     public function testRelativeUrls()
@@ -95,19 +95,19 @@ class SanitizeTest extends TestCase
         // /page?utm_...
         $input = '<a href="/page?utm_medium=email">Link</a>';
         $expected = '<a href="/page">Link</a>';
-        $this->assertEquals($expected, ups_sanitize_text_urls($input));
+        $this->assertEquals($expected, url_parameter_stripper_sanitize_text_urls($input));
     }
     
     public function testMultipleParams()
     {
         $this->assertEquals(
             'https://example.com/?keep=me',
-            ups_strip_url('https://example.com/?foo=bar&keep=me')
+            url_parameter_stripper_strip_url('https://example.com/?foo=bar&keep=me')
         );
         
         $this->assertEquals(
             'https://example.com/?keep=me',
-            ups_strip_url('https://example.com/?utm_source=x&keep=me&gclid=y')
+            url_parameter_stripper_strip_url('https://example.com/?utm_source=x&keep=me&gclid=y')
         );
     }
 
@@ -131,7 +131,7 @@ class SanitizeTest extends TestCase
         
         $this->assertEquals(
             $expected,
-            ups_strip_url($input)
+            url_parameter_stripper_strip_url($input)
         );
     }
 
@@ -145,7 +145,7 @@ class SanitizeTest extends TestCase
         
         $this->assertEquals(
             $expected,
-            ups_sanitize_text_urls($input)
+            url_parameter_stripper_sanitize_text_urls($input)
         );
         
         // Also check single quotes escaped
@@ -154,7 +154,7 @@ class SanitizeTest extends TestCase
         
         $this->assertEquals(
             $expected2,
-            ups_sanitize_text_urls($input2)
+            url_parameter_stripper_sanitize_text_urls($input2)
         );
     }
 }

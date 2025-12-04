@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) exit;
  *   - query param keys: utm_*, gclid, ref
  *   - key=value: utm_source=chatgpt.com
  */
-function ups_get_patterns()
+function url_parameter_stripper_get_patterns()
 {
     $raw = get_option(UPS_OPTION_KEY, 'utm_*,gclid,fbclid');
     $parts = array_filter(array_map('trim', explode(',', (string)$raw)));
@@ -17,7 +17,7 @@ function ups_get_patterns()
 /**
  * Return array of fragment removal patterns.
  */
-function ups_get_fragment_patterns()
+function url_parameter_stripper_get_fragment_patterns()
 {
     $raw = get_option('ups_fragment_patterns', '');
     $parts = array_filter(array_map('trim', explode(',', (string)$raw)));
@@ -27,7 +27,7 @@ function ups_get_fragment_patterns()
 /**
  * True if $str looks like a URL.
  */
-function ups_looks_like_url($str)
+function url_parameter_stripper_looks_like_url($str)
 {
     return is_string($str) && preg_match('#^https?://#i', $str);
 }
@@ -35,7 +35,7 @@ function ups_looks_like_url($str)
 /**
  * Remove matching query params from a single URL.
  */
-function ups_strip_url($url)
+function url_parameter_stripper_strip_url($url)
 {
     // We allow partial URLs in hrefs (like /foo/bar), so strict ups_looks_like_url check 
     // might be too restrictive if we want to strip params from relative URLs too.
@@ -53,8 +53,8 @@ function ups_strip_url($url)
     // So I will remove the strict http check at the start of this function, 
     // relying on wp_parse_url to fail if it's garbage.
     
-    $patterns = ups_get_patterns();
-    $fragPatterns = ups_get_fragment_patterns();
+    $patterns = url_parameter_stripper_get_patterns();
+    $fragPatterns = url_parameter_stripper_get_fragment_patterns();
     
     if (empty($patterns) && empty($fragPatterns)) return $url;
 
@@ -182,7 +182,7 @@ function ups_strip_url($url)
 /**
  * Find all URLs in HREF attributes and sanitize them.
  */
-function ups_sanitize_text_urls($text)
+function url_parameter_stripper_sanitize_text_urls($text)
 {
     if (!is_string($text) || $text === '') return $text;
     
@@ -206,7 +206,7 @@ function ups_sanitize_text_urls($text)
                 $url = wp_unslash($url);
             }
             
-            $clean = ups_strip_url($url);
+            $clean = url_parameter_stripper_strip_url($url);
             
             if ($is_slashed) {
                 $clean = wp_slash($clean);
@@ -221,22 +221,22 @@ function ups_sanitize_text_urls($text)
 /**
  * Sanitize strings, arrays, or objects recursively.
  */
-function ups_sanitize_mixed($value)
+function url_parameter_stripper_sanitize_mixed($value)
 {
     if (is_string($value)) {
         // If it's a standalone URL string (e.g. a meta field that is just a URL), strip it.
-        if (ups_looks_like_url($value)) {
-            return ups_strip_url($value);
+        if (url_parameter_stripper_looks_like_url($value)) {
+            return url_parameter_stripper_strip_url($value);
         }
         // Otherwise scan for links in the text
-        return ups_sanitize_text_urls($value);
+        return url_parameter_stripper_sanitize_text_urls($value);
     }
     if (is_array($value)) {
-        foreach ($value as $k => $v) $value[$k] = ups_sanitize_mixed($v);
+        foreach ($value as $k => $v) $value[$k] = url_parameter_stripper_sanitize_mixed($v);
         return $value;
     }
     if (is_object($value)) {
-        foreach ($value as $k => $v) $value->$k = ups_sanitize_mixed($v);
+        foreach ($value as $k => $v) $value->$k = url_parameter_stripper_sanitize_mixed($v);
         return $value;
     }
     return $value;

@@ -5,7 +5,7 @@ A WordPress plugin that strips unwanted substrings or query parameters from URLs
 ## Requirements
 
 -   Node.js 18+ and [pnpm](https://pnpm.io/) (see `packageManager` field)
--   PHP 5.6+ / WordPress 4.5+ for runtime (per plugin header)
+-   PHP 6.0+ / WordPress 4.5+ for runtime (per plugin header)
 -   `zip` available on your PATH (used by the bundling task)
 
 ## Project structure highlights

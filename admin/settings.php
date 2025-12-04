@@ -7,7 +7,7 @@ add_action('admin_menu', function () {
         __('URL Stripper', 'url-parameter-stripper'),
         UPS_CAP,
         'url-parameter-stripper',
-        'ups_render_settings_page'
+        'url_parameter_stripper_render_settings_page'
     );
 });
 
@@ -59,7 +59,7 @@ add_action('admin_init', function () {
     }, 'url-parameter-stripper', 'ups_main');
 });
 
-function ups_render_settings_page()
+function url_parameter_stripper_render_settings_page()
 {
     if (!current_user_can(UPS_CAP)) return;
     echo '<div class="wrap"><h1>' . esc_html__('URL Parameter Stripper', 'url-parameter-stripper') . '</h1>';
