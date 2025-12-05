@@ -16,7 +16,7 @@ URL Parameter Stripper keeps your database free from noisy tracking fragments. I
 - Strip tracking params like utm_* / gclid / fbclid (supports wildcards)
 - Remove arbitrary substrings that you define (for example affiliate tokens)
 - Applies to post content, excerpts, comments (including author URLs), profile URLs, and option/meta data passed through the sanitizer helper
-- Tested on WordPress 6.8 with classic and block editors
+- Tested on WordPress 6.9 with classic and block editors
 
 = Configuration =
 1. Navigate to **Settings → URL Stripper**.
@@ -50,4 +50,4 @@ Yes. Each site holds its own pattern list in options, and the capability check e
 == Changelog ==
 
 = 1.0.0 =
-- Initial release verified on WordPress 6.8
+- Initial release verified on WordPress 6.9
